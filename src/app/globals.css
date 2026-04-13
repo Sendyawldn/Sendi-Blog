@@ -1,26 +1,39 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+@plugin "@tailwindcss/typography";
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #1A1714;
+  color: #E8E0D4;
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-heading);
+}
+
+.prose :where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-heading);
+}
+
+code, pre {
+  font-family: var(--font-code);
+}
+
+.prose {
+  --tw-prose-body: #907860;
+  --tw-prose-headings: #E8E0D4;
+  --tw-prose-lead: #C0B090;
+  --tw-prose-links: #D4A870;
+  --tw-prose-bold: #C0B090;
+  --tw-prose-counters: #6A5A48;
+  --tw-prose-bullets: #3A3428;
+  --tw-prose-hr: #3A3428;
+  --tw-prose-quotes: #C0B090;
+  --tw-prose-quote-borders: #3A3428;
+  --tw-prose-captions: #6A5A48;
+  --tw-prose-code: #E8E0D4;
+  --tw-prose-pre-code: #C0B090;
+  --tw-prose-pre-bg: #2C2820;
+  --tw-prose-th-borders: #3A3428;
+  --tw-prose-td-borders: #3A3428;
 }
