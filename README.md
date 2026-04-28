@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sendi Blog
 
-## Getting Started
+Blog pribadi berbasis **Next.js 16 + App Router** dengan konten artikel dari file **MDX**. Tampilan dibuat dengan nuansa dark theme, animasi ringan menggunakan Framer Motion, dan halaman artikel yang mendukung metadata tambahan seperti skor Turnitin serta daftar referensi.
 
-First, run the development server:
+## Fitur Utama
+
+- Landing page profil singkat + daftar tulisan terbaru.
+- Halaman daftar semua artikel (`/blog`).
+- Halaman detail artikel dinamis (`/blog/[slug]`) dari file MDX.
+- Sorting artikel berdasarkan tanggal terbaru.
+- Metadata artikel tambahan:
+  - `turnitin` untuk menampilkan indikator persentase kemiripan.
+  - `references` untuk menampilkan daftar sumber.
+- UI modern dengan Tailwind CSS v4 dan font Google (`Space Grotesk`, `Lora`, `JetBrains Mono`).
+
+## Tech Stack
+
+- **Framework:** Next.js 16.2.3
+- **Language:** TypeScript
+- **UI:** Tailwind CSS v4
+- **Animation:** Framer Motion
+- **Content Parsing:** gray-matter + next-mdx-remote
+
+## Struktur Proyek
+
+```txt
+.
+├── content/blog/            # Seluruh konten artikel .mdx
+├── public/                  # Aset statis (gambar profil, ikon)
+├── src/
+│   ├── app/                 # Routing App Router
+│   │   ├── blog/
+│   │   │   ├── [slug]/      # Halaman detail artikel
+│   │   │   └── page.tsx     # Halaman daftar artikel
+│   │   ├── layout.tsx       # Layout global
+│   │   └── page.tsx         # Homepage
+│   ├── components/          # Komponen UI (Navbar, Footer, HomeView)
+│   └── lib/mdx.ts           # Loader & parser metadata artikel MDX
+├── package.json
+└── README.md
+```
+
+## Menjalankan Project
+
+### 1) Install dependency
+
+```bash
+npm install
+```
+
+### 2) Jalankan mode development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka `http://localhost:3000` di browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3) Build production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+### 4) Jalankan hasil build
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Menulis Artikel Baru
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Tambahkan file baru di folder `content/blog/` dengan format:
 
-## Deploy on Vercel
+```mdx
+---
+title: "Judul Artikel"
+date: "2026-04-28"
+excerpt: "Ringkasan singkat artikel."
+turnitin:
+  score: 12
+  label: "Sangat Orisinal"
+references:
+  - title: "Nama Sumber"
+    url: "https://example.com"
+  - title: "Buku atau jurnal tanpa URL"
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Konten artikel ditulis di sini menggunakan MDX.
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Catatan metadata
+
+- `title`, `date`, dan `excerpt` digunakan di halaman list/home.
+- Nama file akan otomatis menjadi `slug` URL.
+  - Contoh: `hello-world.mdx` → `/blog/hello-world`
+- `turnitin` dan `references` bersifat opsional.
+
+## Script NPM
+
+- `npm run dev` → Menjalankan server development.
+- `npm run build` → Build aplikasi untuk production.
+- `npm run start` → Menjalankan hasil build.
+- `npm run lint` → Menjalankan ESLint.
